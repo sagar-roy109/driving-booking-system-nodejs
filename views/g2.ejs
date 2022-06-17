@@ -1,90 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-    <!-- head  -->
-	<%- include('layouts/head'); -%>
-    <body>
-        <!-- include navbar  -->
- <%- include('layouts/nav'); -%>
-        <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/contact-bg.jpg')">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="page-heading">
-                            <h1>G2 Test Booking</h1>
+<!-- head  -->
+<%- include('layouts/head'); -%>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- Main Content-->
-        <main class="mb-4">
-		<div class="container mb-4">
-			<div class="row">
-				<div class="col-md-12">
-					<h3>Enter Following Details</h3>
+	<body>
+		<!-- include navbar  -->
+		<%- include('layouts/nav'); -%>
+			<!-- Page Header-->
+			<header class="masthead" style="background-image: url('assets/img/contact-bg.jpg')">
+				<div class="container position-relative px-4 px-lg-5">
+					<div class="row gx-4 gx-lg-5 justify-content-center">
+						<div class="col-md-10 col-lg-8 col-xl-7">
+							<div class="page-heading">
+								<h1>G2 Test Booking</h1>
 
-					<!-- form  -->
-					<form class="mt-4">
-						<p class="mb-4">Personal Information:</p>
-						<div class="row">
-						  <div class="col form-group">
-							<label for="fname">First Name</label>
-							<input type="text" class="form-control" id="fname">
-						  </div>
-						  <div class="col form-group">
-							<label for="lname">Last Name</label>
-							<input type="text" class="form-control" id="lname">
-						  </div>
+							</div>
 						</div>
-						<div class="row mb-2">
-							<div class="col form-group">
-							  <label for="dob">DOB</label>
-							  <input type="date" class="form-control" id="dob">
-							</div>
-							<div class="col form-group mb-2">
-							  <label for="age">Age</label>
-							  <input type="number" class="form-control" id="age">
-							</div>
-						  </div>
-						  <div class="row mb-2">
-							<div class="col form-group">
-							  <label for="lc">License Number</label>
-							  <input type="text" class="form-control" id="lc">
-							</div>
-
-						  </div>
-						  <p class="mb-4">Car details:</p>
-						<div class="row">
-						  <div class="col form-group">
-							<label for="make">Make</label>
-							<input type="text" class="form-control" id="make">
-						  </div>
-						  <div class="col form-group">
-							<label for="model">Model</label>
-							<input type="text" class="form-control" id="model">
-						  </div>
-						</div>
-						<div class="row mb-2">
-							<div class="col form-group">
-							  <label for="year">Year</label>
-							  <input type="number" class="form-control" id="year">
-							</div>
-							<div class="col form-group mb-2">
-							  <label for="pnumber">Plate Number</label>
-							  <input type="text" class="form-control" id="pnumber">
-							</div>
-						  </div>
-						  <button class="mb-2 mt-2 btn btn-primary" type="submit">Submit</button>
-					  </form>
+					</div>
 				</div>
-			</div>
-		</div>
-        </main>
-        <!-- Footer-->
-        <%- include ('layouts/footer'); -%>
-		<!-- scripts  -->
-		<%- include('layouts/scripts'); -%>
-    </body>
+			</header>
+			<!-- Main Content-->
+			<main class="mb-4">
+				<div class="container mb-4">
+					<div class="row">
+						<div class="col-md-12">
+							<h3>Enter Following Details</h3>
+
+							<!-- form  -->
+							<form class="mt-4" action="/data/create" method="POST">
+								<p class="mb-4">Personal Information:</p>
+								<div class="row">
+									<div class="col form-group">
+										<label for="fname">First Name</label>
+										<input required type="text" class="form-control" id="fname" name="fname">
+									</div>
+									<div class="col form-group">
+										<label for="lname">Last Name</label>
+										<input required type="text" class="form-control" id="lname" name="lname">
+									</div>
+								</div>
+								<div class="row mb-2">
+									<div class="col form-group">
+										<label for="dob">DOB</label>
+										<input required type="date" class="form-control" id="dob" name="dob">
+									</div>
+									<div class="col form-group mb-2">
+										<label for="age">Age</label>
+										<input required type="number" class="form-control" id="age" name="age">
+									</div>
+								</div>
+								<div class="row mb-2">
+									<div class="col form-group">
+										<label for="lc">License Number</label>
+										<input required type="text" class="form-control" id="lc" name="lc">
+									</div>
+
+								</div>
+								<p class="mb-4">Car details:</p>
+								<div class="row">
+									<div class="col form-group">
+										<label for="make">Make</label>
+										<input required type="text" class="form-control" id="make" name="make">
+									</div>
+									<div class="col form-group">
+										<label for="model">Model</label>
+										<input required type="text" class="form-control" id="model" name="model">
+									</div>
+								</div>
+								<div class="row mb-2">
+									<div class="col form-group">
+										<label for="year">Year</label>
+										<input required type="number" class="form-control" id="year" name="year">
+									</div>
+									<div class="col form-group mb-2">
+										<label for="pnumber">Plate Number</label>
+										<input required type="text" class="form-control" id="pnumber" name="pnumber">
+									</div>
+								</div>
+								<button class="mb-2 mt-2 btn btn-primary" type="submit">Submit</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</main>
+			<!-- Footer-->
+			<%- include ('layouts/footer'); -%>
+				<!-- scripts  -->
+				<%- include('layouts/scripts'); -%>
+	</body>
+
 </html>

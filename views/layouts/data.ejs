@@ -1,0 +1,61 @@
+<h5 class="mt-4">Personal Information</h5>
+<table class="table table-striped mb-4">
+	<thead>
+		<th>First</th>
+		<th>Last Name</th>
+		<th>DOB</th>
+		<th>Age</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<%= blogposts.fname %>
+			</td>
+			<td>
+				<%= blogposts.lname %>
+			</td>
+			<td>
+				<%= blogposts.dob %>
+			</td>
+			<td>
+				<%= blogposts.age %>
+			</td>
+		</tr>
+	</tbody>
+
+
+
+</table>
+
+<h5>Driving Information</h5>
+<table class="table table-striped">
+	<thead>
+		<th>Make</th>
+		<th>Model</th>
+		<th>Year</th>
+		<th>License</th>
+		<th>Plate Number</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<%= blogposts.make %>
+			</td>
+			<td>
+				<%= blogposts.model %>
+			</td>
+			<td>
+				<%= blogposts.year %>
+			</td>
+			<td>
+				<%= blogposts.lc %>
+			</td>
+			<td>
+				<%= blogposts.pnumber %>
+			</td>
+		</tr>
+	</tbody>
+
+</table>
+
+<a href="/data/show/<%=blogposts._id%>" class="btn btn-primary mt-6 mb-6" style="width:200px">Change Car Information</a>

@@ -1,0 +1,54 @@
+<form class="mt-4" action="/data/create" method="POST">
+	<p class="mb-4">Personal Information:</p>
+	<div class="row">
+		<div class="col form-group">
+			<label for="fname">First Name</label>
+			<input disabled type="text" class="form-control" id="fname" name="fname" value="<%= blogposts.fname %>">
+		</div>
+		<div class="col form-group">
+			<label for="lname">Last Name</label>
+			<input disabled type="text" class="form-control" id="lname" name="lname" value="<%= blogposts.lname %>">
+		</div>
+	</div>
+	<div class="row mb-2">
+		<div class="col form-group">
+			<label for="dob">DOB</label>
+			<input disabled type="date" class="form-control" id="dob" name="dob" value='<%= blogposts.dob %>''>
+		</div>
+		<div class="col form-group mb-2">
+			<label for="age">Age</label>
+			<input disabled type="number" class="form-control" id="age" name="age" value="<%= blogposts.age %>">
+		</div>
+		</div>
+		<div class="row mb-2">
+		<div class="col form-group">
+			<label for="lc">License Number</label>
+			<input disabled type="text" class="form-control" id="lc" name="lc" value="<%= blogposts.lc %>">
+		</div>
+
+		</div>
+		<p class="mb-4">Car details:</p>
+		</form>
+		<form action="/data/update/<%=blogposts._id%>" method="POST">
+	<div class="row">
+		<div class="col form-group">
+		<label for="make">Make</label>
+		<input type="text" class="form-control" id="make" name="make" value="<%= blogposts.make %>">
+		</div>
+		<div class="col form-group">
+		<label for="model">Model</label>
+		<input type="text" class="form-control" id="model" name="model" value="<%= blogposts.model %>">
+		</div>
+	</div>
+	<div class="row mb-2">
+		<div class="col form-group">
+			<label for="year">Year</label>
+			<input type="text" class="form-control" id="year" name="year" value=' <%=blogposts.year %>'>
+		</div>
+		<div class="col form-group mb-2">
+			<label for="pnumber">Plate Number</label>
+			<input type="text" class="form-control" id="pnumber" name="pnumber" value="<%= blogposts.pnumber %>">
+		</div>
+	</div>
+	<button class="mb-2 mt-2 btn btn-primary" type="submit">Update</button>
+</form>

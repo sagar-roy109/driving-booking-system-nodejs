@@ -10,12 +10,16 @@ mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true });
 
 //Middleware
 const app = new express();
+const exptressSession = require('express-session');
 
 
 app.use(express.static('secret'));
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(exptressSession({
+	secret: 'keyboard cat'
+}));
 
 
 //API
@@ -72,6 +76,10 @@ app.get('/data/show/:id', editLicense);
 //Craete user
 const createUser = require('./controllers/createUser');
 app.post('/data/Usercreate',createUser);
+
+//login
+const login = require('./controllers/login');
+app.post('/data/login',login);
 
 
 

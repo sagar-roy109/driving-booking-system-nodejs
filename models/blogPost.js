@@ -19,8 +19,16 @@ const BlogPostSchema = new Schema({
 		type: Number,
 		default: 0
 	},
-	username: String,
-	password: String,
+	username: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	password: {
+		type: String,
+		required: true
+
+	},
 	user_type: String,
 	make: {
 		type: String,

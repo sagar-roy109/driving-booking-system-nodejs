@@ -10,6 +10,8 @@ mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true });
 
 //Middleware
 const app = new express();
+
+
 app.use(express.static('secret'));
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -18,7 +20,6 @@ app.use(express.urlencoded());
 
 //API
 app.get('/', (req, res) => {
-	// res.sendFile(path.resolve(__dirname,'view/index.html'));
 	res.render('index');
 });
 
@@ -27,9 +28,6 @@ app.get('/g_test', async (req, res) => {
 
 	res.render('g');
 });
-
-
-
 
 
 app.get('/g2_test', (req, res) => {
@@ -41,54 +39,45 @@ app.get('/dashboard', (req, res) => {
 app.get('/login', (req, res) => {
 	res.render('login');
 });
-app.get('/registration-succcess', (req, res) => {
+
+
+
+
+// license Registration
+const licenseregistration = require('./controllers/registration-done')
+app.get('/registration-succcess', licenseregistration);
+
+// license create
+const createLicense = require('./controllers/createLicense');
+app.post('/data/create', createLicense);
+
+//license update
+const licenseUpdate = require('./controllers/licenseUpdate');
+app.get('/registration-succcess', licenseUpdate);
+app.post('/data/update/:id', licenseUpdate);
+
+//READ License
+const readLicense = require('./controllers/readLicense');
+app.get('/data/show', readLicense);
+
+//edit License
+const editLicense = require('./controllers/editLicense');
+app.get('/data/show/:id', editLicense);
+
+
+
+
+
+
+//Craete user
+const createUser = require('./controllers/createUser');
+app.post('/data/Usercreate',createUser);
+
+
+
+app.get ('/update-succcess', (req, res) => {
 	res.render('registration-done');
 });
-app.get('/update-succcess', (req, res) => {
-	res.render('registration-done');
-});
-
-//Craete data
-
-app.post('/data/create', async (req, res) => {
-
-	await BlogPost.create(req.body);
-	console.log(req.body);
-	res.redirect('/registration-succcess');
-});
-
-
-//READ DATA
-
-app.get('/data/show', async (req, res) => {
-
-	const blogposts = await BlogPost.findOne({ lc: req.query.lc });
-	console.log(blogposts);
-	res.render('g', {
-		blogposts
-	});
-});
-
-app.get('/data/show/:id', async (req, res) => {
-
-	const blogposts = await BlogPost.findById(req.params.id);
-	res.render('data-edit', {
-		blogposts
-	});
-});
-
-// Update Data
-
-app.post('/data/update/:id', async (req, res) => {
-	id = req.params.id;
-	await BlogPost.findByIdAndUpdate(id, req.body);
-	res.redirect('/update-succcess');
-
-});
-
-
-
-
 
 
 

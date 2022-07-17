@@ -20,6 +20,11 @@ app.use(express.urlencoded());
 app.use(exptressSession({
 	secret: 'keyboard cat'
 }));
+global.loggedIn = null;
+app.use("*", (req,res,next)=>{
+	loggedIn = req.session.userId;
+	next();
+})
 
 
 //API
@@ -29,20 +34,37 @@ app.get('/', (req, res) => {
 
 
 app.get('/g_test', async (req, res) => {
+	if(req.session.userId){
+		res.render('g');
+	}else{
+		res.redirect('/login');
+	}
 
-	res.render('g');
 });
 
 
 app.get('/g2_test', (req, res) => {
-	res.render('g2');
+	if(req.session.userId){
+		res.render('g2');
+	}else{
+		res.redirect('/login');
+	}
+
 });
 app.get('/dashboard', (req, res) => {
-	res.render('dashboard');
+	if(req.session.userId){
+		res.render('dashboard');
+	}else{
+		res.redirect('/login');
+	}
+
 });
 app.get('/login', (req, res) => {
 	res.render('login');
 });
+
+
+
 
 
 
@@ -81,7 +103,9 @@ app.post('/data/Usercreate',createUser);
 const login = require('./controllers/login');
 app.post('/data/login',login);
 
-
+//logout
+const logout = require('./controllers/logout');
+app.get('/logout', logout);
 
 app.get ('/update-succcess', (req, res) => {
 	res.render('registration-done');

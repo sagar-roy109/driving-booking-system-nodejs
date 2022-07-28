@@ -6,7 +6,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 const BlogPost = require('./models/blogPost.js');
 const User = require('./models/User.js');
+const Appointment = require('./models/Appointment.js');
 const ObjectId = require('mongodb').ObjectID;
+
 mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true });
 
 
@@ -30,7 +32,7 @@ app.use("*", async (req,res,next)=>{
 	loggedIn = req.session.userId;
 	if(loggedIn){
 		 user_type = await User.findById({_id: ObjectId(req.session.userId)});
-		console.log(user_type);
+
 	}
 
 	next();
@@ -64,9 +66,13 @@ app.get('/g_test', async (req, res) => {
 // ass-4 send data to g2 page
 app.get('/g2_test', async (req, res) => {
 	if(req.session.userId){
-		const information = await BlogPost.findOne({userid: ObjectId(req.session.userId)})
+		const information = await BlogPost.findOne({userid: ObjectId(req.session.userId)});
+		let dd = new Date().toISOString().slice(0, 10);
+		const slots = await Appointment.find({date: dd});
 		res.render('g2',{
-			information
+			information,
+			slots,
+			dd
 		});
 	}else{
 		res.redirect('/login');
@@ -74,16 +80,69 @@ app.get('/g2_test', async (req, res) => {
 
 });
 //ass-4 appointment view
-app.get('/appointment', (req, res) => {
+app.get('/appointment', async (req, res) => {
 	if(req.session.userId){
 		if(user_type.user_type == 'admin'){
-			res.render('appointment');
+			const dateTime = 	await Appointment.find({date: req.body.date});
+			res.render('appointment',{dateTime});
 		}
 	}else{
 		res.redirect('/login');
 	}
 
 });
+
+app.get('/get-dates', async (req, res) => {
+	if(req.session.userId){
+		if(user_type.user_type == 'admin'){
+
+			let searchDate = req.query.date;
+			let find = await Appointment.find(
+					{date: req.query.date});
+
+			res.render('get-dates',{find, searchDate});
+
+		}
+	}else{
+		res.redirect('/login');
+	}
+
+});
+
+app.get('/apt-success', (req, res) => {
+	if(req.session.userId){
+		if(user_type.user_type == 'admin'){
+			res.render('apt-success');
+		}
+	}else{
+		res.redirect('/login');
+	}
+
+});
+
+app.get('/apt-failed', (req, res) => {
+	if(req.session.userId){
+		if(user_type.user_type == 'admin'){
+			res.render('apt-failed');
+		}
+	}else{
+		res.redirect('/login');
+	}
+
+});
+app.get('/booking-success', (req, res) => {
+	if(req.session.userId){
+		if(user_type.user_type == 'driver'){
+			res.render('bookApt');
+		}
+	}else{
+		res.redirect('/login');
+	}
+
+});
+
+
+
 
 
 app.get('/dashboard', (req, res) => {
@@ -107,7 +166,7 @@ app.get('/login', (req, res) => {
 
 
 
-
+// ALL CRUP OPT
 
 // license Registration
 const licenseregistration = require('./controllers/registration-done')
@@ -129,6 +188,18 @@ app.get('/data/show', readLicense);
 //edit License
 const editLicense = require('./controllers/editLicense');
 app.get('/data/show/:id', editLicense);
+
+// ASS-4
+// create appointment
+
+const createAppt = require('./controllers/createApt');
+app.post('/create-apt', createAppt);
+
+// Book Appointment
+
+const bookApt = require('./controllers/bookApt');
+app.post('/book-apt', bookApt);
+
 
 
 

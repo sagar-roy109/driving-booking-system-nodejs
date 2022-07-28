@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- head  -->
+<%- include('layouts/head'); -%>
+
+	<body>
+		<!-- include navbar  -->
+		<%- include('layouts/nav'); -%>
+			<!-- Page Header-->
+			<header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+				<div class="container position-relative px-4 px-lg-5">
+					<div class="row gx-4 gx-lg-5 justify-content-center">
+						<div class="col-md-10 col-lg-8 col-xl-7">
+							<div class="post-heading">
+								<h1>Appointment</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<main>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<h2>Please add appointment time and dates </h2>
+							<form action="/create-apt" method="POST">
+									<input readonly="readonly" type="date"  value= '<%= searchDate%>' name="date">
+								<%
+								if(find.length > 0 ){
+									var times = [];
+									for(finds of find){
+										times.push(finds.time);
+									}
+									console.log(times);
+								%>
+								<%
+									if(times.length === 3){
+								%>
+									<h1 style="color: RED">No Time Slot Available </h1>
+									<a href="/appointment" class="mb-2 mt-2 btn btn-primary" type="submit">Back to calender</a>
+
+									<%
+									} else { %>
+									<div class="form-check">
+										<% if(times.includes('9:00AM')){ %>
+                    <input class="form-check-input" disabled value="9:00AM" type="radio" name="time" id="time1">
+										<% } else { %>
+											<input class="form-check-input"  value="9:00AM" type="radio" name="time" id="time1">
+										<% } %>
+                    <label class="form-check-label" for="time1">
+                      9:00AM
+                    </label>
+                  </div>
+                  <div class="form-check">
+										<% if(times.includes('10:00AM')){ %>
+											<input class="form-check-input" disabled value="10:00AM" type="radio" name="time" id="times2">
+											<% } else { %>
+												<input class="form-check-input" value="10:00AM" type="radio" name="time" id="time2" >
+											<% } %>
+
+                    <label class="form-check-label" for="time2">
+                      10:00AM
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <% if(times.includes('11:00AM')){ %>
+											<input class="form-check-input" disabled value="11:00AM" type="radio" name="time" id="times3">
+											<% } else { %>
+												<input class="form-check-input" value="11:00AM" type="radio" name="time" id="time3" >
+											<% } %>
+                    <label class="form-check-label" for="time3">
+                      11:00AM
+                    </label>
+                  </div>
+                  <button class="mb-2 mt-2 btn btn-primary" type="submit">Add time</button>
+								<% } %>
+
+								<% }%>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</main>
+
+			<!-- Footer-->
+			<%- include ('layouts/footer'); -%>
+				<!-- Bootstrap core JS-->
+				<%- include('layouts/scripts'); -%>
+	</body>
+
+</html>

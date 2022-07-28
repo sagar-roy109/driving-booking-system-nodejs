@@ -21,7 +21,35 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
+							<h2>Please add appointment time and dates </h2>
+							<form action="/get-dates" method="get" >
 
+								<div class="form-check">
+
+									<label class="form-check-label" for="date">Select Date</label>
+									<input required type="date" name="date" id="date">
+								</div>
+
+								<!-- <div class="form-check">
+									<input class="form-check-input" value="9:00AM" type="radio" name="time" id="time1">
+									<label class="form-check-label" for="time1">
+										9:00AM
+									</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" value="10:00AM" type="radio" name="time" id="time2" checked>
+									<label class="form-check-label" for="time2">
+										10:00AM
+									</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" value="11:00AM" type="radio" name="time" id="time2" checked>
+									<label class="form-check-label" for="time2">
+										11:00AM
+									</label>
+								</div> -->
+								<button class="mb-2 mt-2 btn btn-primary" type="submit">Get Dates</button>
+							</form>
 					</div>
 				</div>
 			</div>

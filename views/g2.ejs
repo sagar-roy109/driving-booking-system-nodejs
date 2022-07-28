@@ -3,6 +3,8 @@
 <!-- head  -->
 <%- include('layouts/head'); -%>
 
+
+
 	<body>
 		<!-- include navbar  -->
 		<%- include('layouts/nav'); -%>
@@ -24,6 +26,40 @@
 				<div class="container mb-4">
 					<div class="row">
 						<div class="col-md-12">
+
+							<!-- appointment list  -->
+							<form action="book-apt" method="POST">
+								<%
+									if(slots.length>0){
+									let slot;
+								%>
+										<h3>Book Slots For <span style="color: crimson;"><%= dd %></span></h3>
+								<%
+									for(slot of slots){
+										if(slot.available === true){
+
+								%>
+
+
+											<input id="<%= slot.time %>" type="radio"  value="<%= slot.time %>" name="time">
+											<label for="<%= slot.time %>"><%= slot.time %></label>
+								<%
+											} else if(slot.available === false){
+
+
+								%>
+										<input disabled id="<%= slot.time %>" type="radio"  value="<%= slot.time %>" name="time">
+										<label for="<%= slot.time %>"><%= slot.time %></label>
+
+								<%
+											}
+										}
+									}
+
+						 		%>
+
+								 <button type="submit" class="btn btn-primary"> Book Now</button>
+							</form>
 
 
 							<!-- ass-4  -->

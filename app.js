@@ -5,6 +5,8 @@ const ejs = require('ejs');
 const path = require('path');
 const mongoose = require('mongoose');
 const BlogPost = require('./models/blogPost.js');
+const User = require('./models/User.js');
+const ObjectId = require('mongodb').ObjectID;
 mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true });
 
 
@@ -21,8 +23,16 @@ app.use(exptressSession({
 	secret: 'keyboard cat'
 }));
 global.loggedIn = null;
-app.use("*", (req,res,next)=>{
+global.user_type =null
+
+// ass-4 check user type
+app.use("*", async (req,res,next)=>{
 	loggedIn = req.session.userId;
+	if(loggedIn){
+		 user_type = await User.findById({_id: ObjectId(req.session.userId)});
+		console.log(user_type);
+	}
+
 	next();
 })
 
@@ -32,25 +42,50 @@ app.get('/', (req, res) => {
 	res.render('index');
 });
 
-
+// ass-4 send data to g page
 app.get('/g_test', async (req, res) => {
 	if(req.session.userId){
-		res.render('g');
-	}else{
+		const information = await BlogPost.findOne({userid: ObjectId(req.session.userId)});
+		console.log(information);
+		if (information == null){
+			res.redirect('/g2_test');
+		}else {
+			res.render('g',{
+				information
+			});
+		}
+
+	} else{
 		res.redirect('/login');
 	}
 
 });
 
-
-app.get('/g2_test', (req, res) => {
+// ass-4 send data to g2 page
+app.get('/g2_test', async (req, res) => {
 	if(req.session.userId){
-		res.render('g2');
+		const information = await BlogPost.findOne({userid: ObjectId(req.session.userId)})
+		res.render('g2',{
+			information
+		});
 	}else{
 		res.redirect('/login');
 	}
 
 });
+//ass-4 appointment view
+app.get('/appointment', (req, res) => {
+	if(req.session.userId){
+		if(user_type.user_type == 'admin'){
+			res.render('appointment');
+		}
+	}else{
+		res.redirect('/login');
+	}
+
+});
+
+
 app.get('/dashboard', (req, res) => {
 	if(req.session.userId){
 		res.render('dashboard');
@@ -60,7 +95,12 @@ app.get('/dashboard', (req, res) => {
 
 });
 app.get('/login', (req, res) => {
-	res.render('login');
+	if(!req.session.userId){
+		res.render('login');
+	}else{
+		res.redirect('/dashboard');
+	}
+
 });
 
 

@@ -1,19 +1,25 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const BlogPostSchema = new Schema({
-	fname: String,
-	lname: String,
-	dob: String,
-	age: Number,
+const bcrypt = require('bcrypt');
 
-	make: String,
-	model: String,
-	year: Number,
-	lc: String,
-	pnumber: String
+
+const UserSchema = new Schema({
+	username: String,
+	password: String,
+	user_type: String
+})
+
+
+//encrypt  driver type
+UserSchema.pre('save',function(next){
+
+	bcrypt.hash(this.password, 10,(error, hash)=>{
+		this.password = hash;
+		next();
+	});
 
 
 })
 
-const BlogPost = mongoose.model('Blogpost', BlogPostSchema);
-module.exports = BlogPost;
+const User = mongoose.model('User', UserSchema);
+module.exports = User;

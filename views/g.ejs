@@ -22,14 +22,79 @@
 			<main class="mb-4">
 				<div class="container">
 					<div class="row">
-						<form action="/data/show" method="GET">
+
+
+						<!--  ass-4 send data to g page -->
+						<% if(information){ %>
+							<table class="table table-striped mb-4">
+								<thead>
+									<th>First</th>
+									<th>Last Name</th>
+									<th>DOB</th>
+									<th>Age</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<%= information.fname %>
+										</td>
+										<td>
+											<%= information.lname %>
+										</td>
+										<td>
+											<%= information.dob %>
+										</td>
+										<td>
+											<%= information.age %>
+										</td>
+									</tr>
+								</tbody>
+
+
+
+							</table>
+
+							<h5>Driving Information</h5>
+							<table class="table table-striped">
+								<thead>
+									<th>Make</th>
+									<th>Model</th>
+									<th>Year</th>
+									<th>License</th>
+									<th>Plate Number</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<%= information.make %>
+										</td>
+										<td>
+											<%= information.model %>
+										</td>
+										<td>
+											<%= information.year %>
+										</td>
+										<td>
+											<%= information.lc %>
+										</td>
+										<td>
+											<%= information.pnumber %>
+										</td>
+									</tr>
+								</tbody>
+
+							</table>
+						<% } %>
+
+
+						<!-- <form action="/data/show" method="GET">
 							<div class="form-group">
 								<label for="lcnumber">Enter Your License Number </label>
 								<input required type="text" class="form-control" id="lcnumber" placeholder="Enter Name"
 									name="lc">
 							</div>
 							<button type="submit" class="btn btn-primary mt-2">Search</button>
-						</form>
+						</form> -->
 						<% if(typeof blogposts !='undefined' ){
 							if(blogposts==null ){ %>
 							<span class="mt-2 mb-2" style="color:red"> User Not Found ! </span>
@@ -45,6 +110,9 @@
 			<%- include ('layouts/footer'); -%>
 				<!-- scripts  -->
 				<%- include('layouts/scripts'); -%>
+
+
+
 	</body>
 
 </html>

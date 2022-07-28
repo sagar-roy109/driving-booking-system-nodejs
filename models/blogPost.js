@@ -19,16 +19,11 @@ const BlogPostSchema = new Schema({
 		type: Number,
 		default: 0
 	},
-	username: {
-		type: String,
-		required: true,
-		unique: true
+	userid:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
 	},
-	password: {
-		type: String,
-		required: true
 
-	},
 	user_type: String,
 	make: {
 		type: String,
@@ -54,27 +49,27 @@ const BlogPostSchema = new Schema({
 
 })
 //encrypt license
-BlogPostSchema.pre('save',function(next){
-	const newLc = this;
-	bcrypt.hash(this.lc, 10,(error, hash)=>{
-		this.lc = hash;
-		next();
-	});
+// BlogPostSchema.pre('save',function(next){
+// 	const newLc = this;
+// 	bcrypt.hash(this.lc, 10,(error, hash)=>{
+// 		this.lc = hash;
+// 		next();
+// 	});
 
 
 
-})
+// })
 
-//encrypt  driver type
-BlogPostSchema.pre('save',function(next){
+// //encrypt  driver type
+// BlogPostSchema.pre('save',function(next){
 
-	bcrypt.hash(this.password, 10,(error, hash)=>{
-		this.password = hash;
-		next();
-	});
+// 	bcrypt.hash(this.password, 10,(error, hash)=>{
+// 		this.password = hash;
+// 		next();
+// 	});
 
 
-})
+// })
 
 const BlogPost = mongoose.model('Blogpost', BlogPostSchema);
 module.exports = BlogPost;

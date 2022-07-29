@@ -75,7 +75,34 @@
                   <button class="mb-2 mt-2 btn btn-primary" type="submit">Add time</button>
 								<% } %>
 
-								<% }%>
+								<% }else{%>
+									<div class="form-check">
+
+											<input class="form-check-input"  value="9:00AM" type="radio" name="time" id="time1">
+
+                    <label class="form-check-label" for="time1">
+                      9:00AM
+                    </label>
+                  </div>
+                  <div class="form-check">
+
+												<input class="form-check-input" value="10:00AM" type="radio" name="time" id="time2" >
+
+
+                    <label class="form-check-label" for="time2">
+                      10:00AM
+                    </label>
+                  </div>
+                  <div class="form-check">
+
+												<input class="form-check-input" value="11:00AM" type="radio" name="time" id="time3" >
+
+                    <label class="form-check-label" for="time3">
+                      11:00AM
+                    </label>
+                  </div>
+									<button class="mb-2 mt-2 btn btn-primary" type="submit">Add time</button>
+								<% } %>
 
 							</form>
 						</div>

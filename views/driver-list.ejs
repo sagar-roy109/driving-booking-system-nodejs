@@ -25,7 +25,7 @@
 							<form action="get-exams" method="GET">
 								<select name="testType" id="test">
 									<option value="g">G</option>
-									<option value="G2">G2</option>
+									<option value="g2">G2</option>
 								</select>
 								<input type="submit" class="btn btn-primary">
 							</form>
@@ -60,6 +60,10 @@
 									<%
 
 								}
+							}else{
+								%>
+								<h2>No results found !</h2>
+								<%
 							}
 
 							%>

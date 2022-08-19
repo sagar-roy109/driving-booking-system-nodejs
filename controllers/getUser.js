@@ -10,10 +10,11 @@ module.exports = async (req, res) => {
 
 	const last_segment = req.url.split('/').pop();
 	const sss = await BlogPost.findOne({userid: ObjectId(last_segment )});
+	const user = await User.findOne({_id: ObjectId(last_segment )});
 
-	console.log(sss);
 
-	res.render('user-details');
+
+	res.render('user-details',{sss, last_segment, user});
 }
 
 

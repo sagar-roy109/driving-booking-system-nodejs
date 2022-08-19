@@ -11,7 +11,7 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="post-heading">
-                            <h1>Appointment</h1>
+                            <h1>Get Student List</h1>
                         </div>
                     </div>
                 </div>
@@ -21,17 +21,63 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-							<h2>Select Test Type </h2>
-							<form action="/get-exams" method="GET">
-								<select name="testType" id="test">
-									<option value="g">G</option>
-									<option value="g2">G2</option>
+							<h2>Select Result  </h2>
+							<form action="/students" method="GET">
+								<select name="result" id="test">
+									<option value="true">Pass</option>
+									<option value="false">Fail</option>
 								</select>
 								<input type="submit" class="btn btn-primary">
 							</form>
 
 
 
+							<div class="drivers-list">
+
+									<table class="table table" method="get" action="driver-details">
+										<thead>
+
+												<td>Name</td>
+												<td>Result</td>
+
+
+										</thead>
+
+									<tbody>
+
+										<%
+
+										if(test.length >0){
+
+								for (user of test){
+									console.log(user)
+									%>
+										<tr>
+											<td><%= user.username %></td>
+											<%if(user.result == true){
+													var result = "Pass";
+												}else{
+													var result = "Fail";
+												}
+											%>
+											<td><%= result %></td>
+
+										</tr>
+									<%
+
+								}
+							}else{
+								%>
+								<h2>No results found !</h2>
+								<%
+							}
+
+							%>
+									</tbody>
+								</table>
+
+
+							</div>
 
 					</div>
 				</div>

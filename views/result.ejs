@@ -12,7 +12,7 @@
 					<div class="row gx-4 gx-lg-5 justify-content-center">
 						<div class="col-md-10 col-lg-8 col-xl-7">
 							<div class="page-heading">
-								<h1><%= sss.fname %>'s Details</h1>
+								<h1>Hello <%= sss.fname %></h1>
 							</div>
 						</div>
 					</div>
@@ -25,14 +25,13 @@
 
 
 						<!--  ass-4 send data to g page -->
-						<% if(sss){ %>
+
 							<table class="table table-striped mb-4">
 								<thead>
 									<th>First Name</th>
 									<th>Last Name</th>
-									<th>Car Make</th>
-									<th>License</th>
-
+									<th>Model</th>
+									<th>Licence</th>
 								</thead>
 								<tbody>
 									<tr>
@@ -43,7 +42,7 @@
 											<%= sss.lname %>
 										</td>
 										<td>
-											<%= sss.make %>
+											<%= sss.model %>
 										</td>
 										<td>
 											<%= sss.lc %>
@@ -55,52 +54,46 @@
 
 							</table>
 
-
-						<% } %>
-
-						<% if(sss){ %>
+							<h5>Results</h5>
 							<table class="table table-striped mb-4">
 								<thead>
 									<th>Comments</th>
-									<th>Result</th>
+									<th>Results</th>
+
 								</thead>
 								<tbody>
 									<tr>
-										<form action="/result-update" method="POST">
-											<td>
-												<%
-
-													if(user.comment){
-														var comment = user.comment;
-													}else{
-														var comment ;
-													}
-
+										<td>
+											<% if(user.comment){
 												%>
-												<input type="text" name="comments" value="<%= comment  %>">
-											</td>
-											<td>
-												<select name="result" id="result" >
-													<option value="1">pass</option>
-													<option value="0">fail</option>
-												</select>
-											</td>
-											<td>
-												<input type="hidden" name="id" value="<%= last_segment %>">
-												<input type="submit" class="btn btn-primary" value="Update">
-											</td>
-
-										</form>
+												<%= user.comment %>
+												<%} else { %>
+													COmments not given yet
+													<%
+												}
+												%>
+										</td>
+										<td>
+											<% if (user.result){
+											%>
+											Pass
+											<%
+											}else{
+												%>
+												Fail
+												<%
+											}
+											 %>
+										</td>
 
 									</tr>
 								</tbody>
 
-
-
 							</table>
 
 
-						<% } %>
+
+
 
 
 						<!-- <form action="/data/show" method="GET">

@@ -236,6 +236,21 @@ app.get('/get-exams', getExamTypes);
 const getUser = require('./controllers/getUser');
 app.get('/user-details/:id', getUser);
 
+// update result
+
+const updateResult = require('./controllers/updateResult');
+app.post('/result-update', updateResult);
+
+// results show to driver
+
+const result = require('./controllers/result');
+app.get('/result', result);
+
+// get student list in admin area
+
+const students = require('./controllers/students');
+app.get('/students', students);
+
 
 
 

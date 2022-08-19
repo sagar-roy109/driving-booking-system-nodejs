@@ -14,7 +14,7 @@ const UserSchema = new Schema({
 	comment:{
 		type:String,
 	},
-	rseult: String,
+	result: Boolean,
 
 })
 

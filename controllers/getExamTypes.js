@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
 	// console.log(req.body , req.body.time );
 	// await Appointment.findOneAndUpdate({date: req.body.sdate, time:req.body.time}, {available: false, userid: req.session.userId, testType: req.body.test});
 	let test =	await User.find({testType: req.query.testType});
-
+		console.log(req.query.testType);
 		res.render('driver-list' ,{test});
 }
 

@@ -231,6 +231,13 @@ app.post('/book-apt', bookApt);
 const getExamTypes = require('./controllers/getExamTypes');
 app.get('/get-exams', getExamTypes);
 
+// get users list
+
+const getUser = require('./controllers/getUser');
+app.get('/user-details/:id', getUser);
+
+
+
 
 
 

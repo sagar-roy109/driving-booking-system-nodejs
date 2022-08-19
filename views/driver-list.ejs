@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- head  -->
+	<%- include('layouts/head'); -%>
+    <body>
+        <!-- include navbar  -->
+ <%- include('layouts/nav'); -%>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Appointment</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+		<main>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+							<h2>Select Test Type </h2>
+							<form action="get-exams" method="GET">
+								<select name="testType" id="test">
+									<option value="g">G</option>
+									<option value="G2">G2</option>
+								</select>
+								<input type="submit" class="btn btn-primary">
+							</form>
+
+
+
+							<div class="drivers-list">
+
+									<table class="table table" method="get" action="driver-details">
+										<thead>
+
+												<td>Name</td>
+												<td>Exam Type</td>
+												<td>Action</td>
+
+										</thead>
+
+									<tbody>
+
+										<%
+
+										if(test.length >0){
+
+								for (user of test){
+									%>
+										<tr>
+											<td><%= user.username %></td>
+											<td><%= user.testType %></td>
+											<td><a  href = "user-details/<%=user._id.toString()%>" class="btn btn-primary" >Details</a>
+
+										</tr>
+									<%
+									console.log( user._id.toString());
+								}
+							}
+
+							%>
+									</tbody>
+								</table>
+
+
+							</div>
+
+					</div>
+				</div>
+			</div>
+		</main>
+
+        <!-- Footer-->
+        <%- include ('layouts/footer'); -%>
+        <!-- Bootstrap core JS-->
+        <%- include('layouts/scripts'); -%>
+    </body>
+</html>

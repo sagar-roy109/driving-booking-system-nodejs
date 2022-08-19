@@ -69,6 +69,7 @@ app.get('/g2_test', async (req, res) => {
 		const information = await BlogPost.findOne({userid: ObjectId(req.session.userId)});
 		let dd = new Date().toISOString().slice(0, 10);
 		const slots = await Appointment.find({date: dd});
+		console.log(new Date());
 		res.render('g2',{
 			information,
 			slots,
@@ -142,6 +143,20 @@ app.get('/booking-success', (req, res) => {
 });
 
 
+// examiner
+
+app.get('/examiner', (req, res) => {
+	if(req.session.userId){
+		if(user_type.user_type == 'examiner'){
+			res.render('examiner');
+		}
+	}else{
+		res.redirect('/login');
+	}
+
+});
+
+
 
 
 
@@ -161,6 +176,8 @@ app.get('/login', (req, res) => {
 	}
 
 });
+
+
 
 
 
@@ -195,11 +212,24 @@ app.get('/data/show/:id', editLicense);
 const createAppt = require('./controllers/createApt');
 app.post('/create-apt', createAppt);
 
+
+// get appointment
+const getApt = require('./controllers/getApt');
+app.get('/get-apt', getApt);
+
+const getAptG = require('./controllers/getAptG');
+app.get('/get-apt-g', getAptG);
+
 // Book Appointment
 
 const bookApt = require('./controllers/bookApt');
 app.post('/book-apt', bookApt);
 
+
+// Get exam types
+
+const getExamTypes = require('./controllers/getExamTypes');
+app.get('/get-exams', getExamTypes);
 
 
 

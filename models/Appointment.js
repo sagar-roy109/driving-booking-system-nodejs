@@ -10,7 +10,7 @@ const AppintmentSchema = new Schema({
 	},
 	available: {
 		type:	Boolean,
-		default : false
+		default : true
 	}
 })
 

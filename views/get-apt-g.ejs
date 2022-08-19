@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- head  -->
+<%- include('layouts/head'); -%>
+
+
+
+	<body>
+		<!-- include navbar  -->
+		<%- include('layouts/nav'); -%>
+			<!-- Page Header-->
+			<header class="masthead" style="background-image: url('assets/img/contact-bg.jpg')">
+				<div class="container position-relative px-4 px-lg-5">
+					<div class="row gx-4 gx-lg-5 justify-content-center">
+						<div class="col-md-10 col-lg-8 col-xl-7">
+							<div class="page-heading">
+								<h1>G Test Booking</h1>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<!-- Main Content-->
+			<main class="mb-4">
+				<div class="container mb-4">
+					<div class="row">
+						<div class="col-md-12">
+
+							<!-- appointment list  -->
+
+							<form action="book-apt" method="POST">
+								<%
+								console.log(slots);
+									if(slots.length>0){
+									let slot;
+								%>
+										<label>Booking Slots For</label>
+										<input type="date" name="sdate" value="<%= dd %>" readonly> <br>
+
+								<%
+									for(slot of slots){
+										if(slot.available === true){
+
+								%>
+
+
+											<input required id="<%= slot.time %>" type="radio"  value="<%= slot.time %>" name="time">
+											<label for="<%= slot.time %>"><%= slot.time %></label>
+								<%
+											} else if(slot.available === false){
+
+
+								%>
+										<input disabled id="<%= slot.time %>" type="radio"  value="<%= slot.time %>" name="time">
+										<label for="<%= slot.time %>"><%= slot.time %></label>
+
+								<%
+											}
+										}
+										%>
+										<br>
+										<label >Test Type</label>
+										<input type="text" readonly value="g" name="test"> <br>
+										<br>
+
+										<button type="submit" class="btn btn-primary"> Book Now</button>
+										<%
+									}else{
+										%>
+										<h1>No slots available Select another date </h1>
+										<%
+									}
+
+						 		%>
+
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</main>
+			<!-- Footer-->
+			<%- include ('layouts/footer'); -%>
+				<!-- scripts  -->
+				<%- include('layouts/scripts'); -%>
+	</body>
+
+</html>

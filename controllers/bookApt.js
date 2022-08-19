@@ -1,16 +1,19 @@
 
 // Book Appointment
 const Appointment = require('../models/Appointment.js');
+const User = require('../models/User.js');
 
 module.exports = async (req, res) => {
 
-	let date;
+	// let date;
 
-	if(!date){
-		date = new Date().toISOString().slice(0, 10);
-	}
+	// if(!date){
+	// 	date = new Date().toISOString().slice(0, 10);
+	// }
 
-	await Appointment.findOneAndUpdate({date: date, time:req.body.time}, {available: false});
+	console.log(req.body , req.body.time );
+	await Appointment.findOneAndUpdate({date: req.body.sdate, time:req.body.time}, {available: false, userid: req.session.userId, testType: req.body.test});
+	await User.findByIdAndUpdate( req.session.userId, { testType: req.body.test});
 
 		res.redirect('/booking-success');
 }

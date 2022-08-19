@@ -6,7 +6,16 @@ const bcrypt = require('bcrypt');
 const UserSchema = new Schema({
 	username: String,
 	password: String,
-	user_type: String
+	user_type: String,
+	testType:{
+		type: String,
+		default : 'default'
+	},
+	comment:{
+		type:String,
+	},
+	rseult: String,
+
 })
 
 
